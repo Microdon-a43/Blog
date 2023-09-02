@@ -26,6 +26,13 @@ export const postCreateValidation = [
     })
     .isString(),
   body('category', 'Выберите категорию').exists(),
-  body('description', 'Введите текст поста').isLength({ min: 15 }).isString(),
-  body('picture', 'Неверная ссылка на картинку').optional().notEmpty(),
+  body(
+    'description',
+    'Недостаточно символов для создания статьи. Введите как минимум от 15 символов'
+  )
+    .isLength({ min: 15 })
+    .isString(),
+  body('picture', 'Прикрепите картинку для создания поста')
+    .optional()
+    .notEmpty(),
 ];

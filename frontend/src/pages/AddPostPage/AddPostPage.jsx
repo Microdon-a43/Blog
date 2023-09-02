@@ -63,21 +63,27 @@ export const AddPostPage = () => {
       );
       if (response.data) {
         setMsg(response.data.message);
+        setTimeout(() => {
+          onCloseMsg();
+           setTimeout(() => {
+            navigate('/')
+          }, 1500)
+        },2000)
+        
       }
     } catch (error) {
-      setMsg(error.response.data.message)
+      setMsg(error.response.data[0].msg);
       console.log(error);
     }
   };
 
-  const onCloseMsg = () => {
+  function onCloseMsg() {
     setMsg('');
-    navigate('/');
-  };
+  }
 
   return (
     <div className="container">
-      {msg && <AuthModal message={msg} onClose={onCloseMsg}/>}
+      {msg && <AuthModal message={msg} onClose={onCloseMsg} />}
       <Card className={cls.addPost}>
         <Title className={cls.title}>Добавить Пост</Title>
         <Form onSubmit={submitChanges}>

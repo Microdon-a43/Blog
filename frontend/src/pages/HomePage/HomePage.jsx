@@ -8,12 +8,11 @@ import moment from 'moment';
 import { $api } from '../../api';
 import { Editor } from '../../components/Modal/Editor';
 import { AuthModal } from '../../components/Modal/AuthModal';
-import { Navigate } from 'react-router-dom';
 
 export const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [articleId, setArticleId] = useState('')
+  const [articleId, setArticleId] = useState('');
   const [msg, setMsg] = useState('');
 
   useEffect(() => {
@@ -46,6 +45,9 @@ export const HomePage = () => {
           (item) => item._id !== response.data.deletedPost._id
         );
         setPosts(newArr);
+        setTimeout(() => {
+          onCloseMsg();
+        }, 1500);
       }
     } catch (error) {
       setMsg(error.response.data.message);
@@ -55,21 +57,23 @@ export const HomePage = () => {
 
   const openEditor = (id) => {
     setIsOpen(!isOpen);
-    setArticleId(id)
+    setArticleId(id);
   };
 
   const closeEditor = () => {
     setIsOpen(false);
   };
 
-  const onCloseMsg = () => {
+  function onCloseMsg() {
     setMsg('');
-  };
+  }
 
   return (
     <div className="container">
-      {isOpen && <Editor active={true} closeModal={closeEditor} id={articleId}/>}
-      {msg && <AuthModal message={msg} onClose={onCloseMsg}/>}
+      {isOpen && (
+        <Editor active={true} closeModal={closeEditor} id={articleId} />
+      )}
+      {msg && <AuthModal message={msg} onClose={onCloseMsg} />}
       <div className={cls.home}>
         <Title className={cls.title}>Unusual blog</Title>
         <div className={cls.articles}>

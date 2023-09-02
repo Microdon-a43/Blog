@@ -24,10 +24,9 @@ export const hasRights = (roles) => {
 
       const post = await Post.findById(req.params.id);
       const postAuthorId = String(post.userID);
-      console.log(postAuthorId);
       const user = await User.findById(req.user._id);
       const userId = String(user._id);
-      
+
 
       if (postAuthorId !== userId) {
         return res.status(403).json({
