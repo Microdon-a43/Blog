@@ -1,14 +1,16 @@
 import React from 'react';
 import { Title } from '../../components/Title/Title';
 import cls from './Profile.module.scss';
-import { Button } from '../../components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/actions/authAction';
 import { AuthModal } from '../../components/Modal/AuthModal';
+import { useEffect } from 'react';
 
 export const ProfilePage = () => {
   const { user } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    
+  })
   return (
     <div className="container">
       <AuthModal />

@@ -20,7 +20,7 @@ export const BlogPage = () => {
     const getArticle = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/${params.id}`
+          `http://localhost:5000/api/post/${params.id}`
         );
         if (response.data) {
           setData([response.data.post]);

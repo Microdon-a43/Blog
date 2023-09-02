@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import Post from '../models/postModel.js';
+import User from '../models/userModel.js';
 
 export const postController = {
   createPost: async (req, res) => {
@@ -61,7 +62,24 @@ export const postController = {
       console.log(error);
     }
   },
-
+  getPostsById: async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        message: 'Пользователь не найден',
+      });
+    }
+    const posts = await Post.find({ userID: user._id });
+    if (!posts) {
+      return res.status(404).json({
+        message: 'У вас еще нет постов',
+      });
+    }
+    return res.status(200).json({
+      message: 'Посты найдены',
+      posts,
+    });
+  },
   updatePost: async (req, res) => {
     try {
       const post = await Post.findByIdAndUpdate(

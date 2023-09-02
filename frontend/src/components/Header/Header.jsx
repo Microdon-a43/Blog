@@ -47,7 +47,7 @@ export const Header = () => {
                         <Link to={'/profile'}>Профиль</Link>
                       </li>
                       <li className={cls.edit}>
-                        <Link to="/personalBlogs">Мои блоги</Link>
+                        <Link to="/myPosts">Мои блоги</Link>
                       </li>
                       <li className={cls.favourite}>
                         <Link to="/favourite">Избранное</Link>
