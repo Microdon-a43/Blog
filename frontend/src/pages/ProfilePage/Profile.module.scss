@@ -1,0 +1,15 @@
+.wrapper {
+  margin-top: 48px;  
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    
+  }
+  .logout {
+    width: 100px;
+  }
+}

@@ -1,0 +1,27 @@
+.btn {
+  padding: 8px 29px;
+  background: var(--red_500);
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  &:hover {
+    background: lighten(#d23669, 5%);
+    color: #fff;
+  }
+}
+
+.max {
+  width: 100%;
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--red_500);
+  border: 1px solid var(--red_500);
+}

@@ -1,0 +1,67 @@
+.wrapper {
+  margin-top: 32px;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  .content {
+    background: #fff;
+    padding: 15px;
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      span {
+        color: #a5a5a5;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .text {
+        color: #000;
+        font-size: 16px;
+        line-height: 30px;
+        margin-bottom: 16px;
+      }
+    }
+    .blogInfo {
+      display: flex;
+      justify-content: space-between;
+
+      .author {
+        display: flex;
+        align-items: center;
+        span {
+          margin-left: 5px;
+        }
+      }
+      .likesAndViews {
+        display: flex;
+        align-items: center;
+
+        .likes,
+        .views {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .img_Wrap{
+    position: relative;
+  }
+  .image {
+    max-width: 700px;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+  }
+
+  .likeBtn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+  }
+}

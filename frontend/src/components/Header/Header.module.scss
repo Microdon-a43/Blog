@@ -1,0 +1,50 @@
+.header {
+  padding: 15px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+    .userpanel {
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 35px;
+        height: 35px;
+        margin-left: 30px;
+      }
+
+      .profile_link {
+        margin-left: 5px;
+        transition: all 0.2s ease-in-out;
+
+        .userMenu {
+          position: absolute;
+          background-color: var(--modalbg);
+          padding: 10px;
+          border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          border: 1px solid var(--gray_500);
+          opacity: 0;
+          visibility: hidden;
+
+          &.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 99;
+          }
+          a:hover {
+            color: rgb(216, 134, 11);
+          }
+        }
+      }
+    }
+  }
+}
