@@ -28,7 +28,7 @@ export const Article = ({
       <div className={cls.article_top}>
         <Link to={id}>
           <Title className={cls.title}>
-            {title.length > 30 && title.slice(0, 50) + '...'}
+            {title}
           </Title>
         </Link>
         <div onFocus={onShowOperations} onBlur={onCloseOperations} tabIndex={0}>
@@ -48,7 +48,7 @@ export const Article = ({
       </div>
       <span>{createdAt}</span>
       <p className={cls.text}>
-        {description.length > 100 && description.slice(0, 300) + '...'}
+        {description.length > 100 ? description.slice(0, 300) + '...' : description}
       </p>
     </div>
   );

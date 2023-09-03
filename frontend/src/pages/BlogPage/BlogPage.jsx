@@ -67,7 +67,6 @@ export const BlogPage = () => {
           },
         });
         if (res.data) {
-          console.log(res.data.liked);
           if (res.data.liked === true) {
             setIsLiked(true);
           } else {
