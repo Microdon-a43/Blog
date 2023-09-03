@@ -19,19 +19,25 @@ export const Article = ({
     setShow(!showOperations);
   };
 
+  const onCloseOperations = () => {
+    setShow(false);
+  };
+
   return (
     <div className={cls.article}>
       <div className={cls.article_top}>
         <Link to={id}>
-          <Title className={cls.title}>{title}</Title>
+          <Title className={cls.title}>
+            {title.length > 30 && title.slice(0, 50) + '...'}
+          </Title>
         </Link>
-        <div onClick={onShowOperations} tabIndex={0}>
+        <div onFocus={onShowOperations} onBlur={onCloseOperations} tabIndex={0}>
           <img src={Option} alt="Option" />
           <ul className={`${cls.modal} ${showOperations && cls.active}`}>
-            <li className={cls.delete} onClick={() => onDeletePost(id)}>
+            <li className={cls.delete} onMouseDown={() => onDeletePost(id)}>
               <Link>Удалить</Link>
             </li>
-            <li className={cls.edit} onClick={() => onOpenEditor(id)}>
+            <li className={cls.edit} onMouseDown={() => onOpenEditor(id)}>
               <Link>Редактировать</Link>
             </li>
             <li className={cls.share}>
@@ -41,7 +47,9 @@ export const Article = ({
         </div>
       </div>
       <span>{createdAt}</span>
-      <p className={cls.text}>{description}</p>
+      <p className={cls.text}>
+        {description.length > 100 && description.slice(0, 300) + '...'}
+      </p>
     </div>
   );
 };

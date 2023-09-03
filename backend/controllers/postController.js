@@ -121,19 +121,51 @@ export const postController = {
     }
   },
   likePost: async (req, res) => {
-    const likedPost = await Post.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $push: { likes: req.user._id },
-      }
-    );
-    if (!likedPost)
-      return res.status(400).json({
-        message: 'Возникла непредвиденная ошибка',
+    const post = await Post.findById(req.params.id);
+
+    const user = await User.findById(req.user._id);
+    if (!user)
+      return res.status(401).json({
+        message: 'Авторизуйтесь',
       });
-    return res.status(200).json({
-      message: 'Вы успешно лайкнули пост',
-      likedPost,
-    });
+
+    if (!post.likes.includes(user._id)) {
+      await Post.findByIdAndUpdate(post._id, {
+        $push: {
+          likes: user._id,
+        },
+      });
+      return res.json({
+        message: 'Like',
+      });
+    } else {
+      await Post.findByIdAndUpdate(post._id, {
+        $pull: {
+          likes: user._id,
+        },
+      });
+      return res.json({
+        message: 'Dislike',
+      });
+    }
+  },
+  getLikedState: async (req, res) => {
+    const post = await Post.findById(req.params.id);
+
+    const user = await User.findById(req.user._id);
+    if (!user)
+      return res.status(401).json({
+        message: 'Авторизуйтесь',
+      });
+
+    if (post.likes.includes(user._id)) {
+      return res.json({
+        liked: true,
+      });
+    } else {
+      return res.json({
+        liked: false,
+      });
+    }
   },
 };

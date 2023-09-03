@@ -8,7 +8,7 @@ import { Button } from '../../components/Button/Button';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AuthModal } from '../../components/Modal/AuthModal';
+import { Message } from '../../components/Modal/Message';
 
 export const RegisterPage = () => {
   const [userData, setUserData] = useState({
@@ -58,7 +58,7 @@ export const RegisterPage = () => {
 
   return (
     <div className="container">
-      {msg && <AuthModal message={msg} onClose={onCloseMsg} />}
+      {msg && <Message message={msg} onClose={onCloseMsg} />}
       <Card className={cls.register}>
         <Title className={cls.title}>Регистрация</Title>
         <Form onSubmit={submitChanges}>

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { $api } from '../../../api';
 import { Article } from '../../../components/Article/Article';
 import { Title } from '../../../components/Title/Title';
+import { HomePage } from '../../HomePage/HomePage';
 import cls from './MyPosts.module.scss';
 
 export const MyPostsPage = () => {
@@ -36,7 +37,6 @@ export const MyPostsPage = () => {
               key={index}
               title={post.title}
               description={post.description}
-              createdAt={moment(post.createdAT).format('LLL')}
               id={post._id}
             />
           ))}

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import moment from 'moment';
 import { $api } from '../../api';
 import { Editor } from '../../components/Modal/Editor';
-import { AuthModal } from '../../components/Modal/AuthModal';
+import { Message } from '../../components/Modal/Message';
 
 export const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -73,7 +73,7 @@ export const HomePage = () => {
       {isOpen && (
         <Editor active={true} closeModal={closeEditor} id={articleId} />
       )}
-      {msg && <AuthModal message={msg} onClose={onCloseMsg} />}
+      {msg && <Message message={msg} onClose={onCloseMsg} />}
       <div className={cls.home}>
         <Title className={cls.title}>Unusual blog</Title>
         <div className={cls.articles}>

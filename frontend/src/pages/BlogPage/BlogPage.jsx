@@ -10,11 +10,13 @@ import view from '../../assets/postsImages/views.svg';
 import avatar from '../../assets/postsImages/avatar.svg';
 import moment from 'moment';
 import { $api } from '../../api';
+import { Message } from '../../components/Modal/Message';
 
 export const BlogPage = () => {
   const params = useParams();
   const [data, setData] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
+  const [msg, setMsg] = useState('');
 
   useEffect(() => {
     const getArticle = async () => {
@@ -32,14 +34,13 @@ export const BlogPage = () => {
     getArticle();
   }, []);
 
-  const likePost = async () => {
-    setIsLiked(!isLiked)
+  const likeOrUnlikePost = async () => {
     const accToken = localStorage.getItem('token');
     try {
       const res = await $api.patch(
         `/post/${params.id}`,
         {
-          likes: [params.id]
+          likes: [params.id],
         },
         {
           headers: {
@@ -48,12 +49,41 @@ export const BlogPage = () => {
         }
       );
       if (res.data) {
-        console.log(res.data);
+        res.data.message === 'Like' ? setIsLiked(true) : setIsLiked(false);
       }
     } catch (error) {
+      setMsg(error.response.data.message);
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const getLikeState = async () => {
+      const accToken = localStorage.getItem('token');
+      try {
+        const res = await $api.get(`/likedPost/${params.id}`, {
+          headers: {
+            Authorization: accToken,
+          },
+        });
+        if (res.data) {
+          console.log(res.data.liked);
+          if (res.data.liked === true) {
+            setIsLiked(true);
+          } else {
+            setIsLiked(false);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLikeState();
+  }, []);
+
+  function onCloseMsg() {
+    setMsg('');
+  }
 
   return (
     <div className="container">
@@ -65,7 +95,7 @@ export const BlogPage = () => {
               src={`http://localhost:5000${post.picture}`}
               alt="img"
             />
-            <div className={cls.likeBtn} onClick={likePost}>
+            <div className={cls.likeBtn} onClick={likeOrUnlikePost}>
               {isLiked ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +135,7 @@ export const BlogPage = () => {
           </div>
 
           <div className={cls.content}>
+            <Message message={msg} onClose={onCloseMsg} />
             <div className={cls.main}>
               <Title className={cls.title}>{post.title}</Title>
               <span>{moment(post.createdAT).format('LLL')}</span>

@@ -9,7 +9,7 @@ import closeBtn from '../../assets/btn-delete.svg';
 import { $api } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AuthModal } from './AuthModal';
+import { Message } from './Message';
 
 export const Editor = ({ active, closeModal, id }) => {
   const [postData, setPostData] = useState([]);
@@ -47,6 +47,7 @@ export const Editor = ({ active, closeModal, id }) => {
 
     try {
       const accToken = localStorage.getItem('token');
+      console.log(accToken);
       const response = await $api.patch(
         `/posts/${id}`,
         {
@@ -60,7 +61,6 @@ export const Editor = ({ active, closeModal, id }) => {
         }
       );
       if (response.data) {
-        console.log(response.data);
         setMsg(response.data.message)
         navigate('/')
       }
@@ -70,10 +70,15 @@ export const Editor = ({ active, closeModal, id }) => {
     }
   };
 
+   function onCloseMsg() {
+    setMsg('');
+  }
+
+
   useEffect(() => {
     const getPost = async () => {
       try {
-        const response = await $api.get(`/posts/${id}`);
+        const response = await $api.get(`/post/${id}`);
         if (response.data) {
           setPostData([response.data.post]);
         }
@@ -87,7 +92,7 @@ export const Editor = ({ active, closeModal, id }) => {
 
   return (
     <div className={`${cls.overlay} ${active && cls.active}`}>
-      {msg && <AuthModal message={msg}/>}
+      {msg && <Message message={msg} onClose={onCloseMsg} />}
       <div className={cls.editor}>
         <div className={cls.editorTop}>
           <Title className={cls.title}>Редактировать Пост</Title>

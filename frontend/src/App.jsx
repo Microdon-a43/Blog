@@ -8,6 +8,7 @@ import { LoginPage } from './pages/AuthPage/LoginPage';
 import { RegisterPage } from './pages/AuthPage/RegisterPage';
 import { BlogPage } from './pages/BlogPage/BlogPage';
 import { HomePage } from './pages/HomePage/HomePage';
+import { FavouritesPage } from './pages/ProfilePage/FavouritePage/FavouritesPage';
 import { MyPostsPage } from './pages/ProfilePage/MyPostsPage/MyPostsPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { getUser } from './store/actions/authAction';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/addPost" element={<AddPostPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/favourites" element={<FavouritesPage />}></Route>
           <Route path="/myPosts" element={<MyPostsPage />}></Route>
           <Route path="/:id" element={<BlogPage />}></Route>
           <Route path="/myPosts/:id" element={<BlogPage />}></Route>

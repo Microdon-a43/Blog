@@ -1,23 +1,21 @@
 import React from 'react';
 import { Title } from '../../components/Title/Title';
 import cls from './Profile.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthModal } from '../../components/Modal/AuthModal';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 export const ProfilePage = () => {
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    
-  })
+  // const actualName = user.username;
+  // console.log(actualName);
+
   return (
     <div className="container">
-      <AuthModal />
       <div className={cls.wrapper}>
         <Title className={cls.title}>Personal Information</Title>
         <div className={cls.info}>
-          <div className={cls.user}>
+          <div className={cls.userInfo}>
             <strong>Username:</strong>
             <div className={cls.area}></div>
           </div>

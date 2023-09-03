@@ -2,7 +2,7 @@ import React from 'react';
 import cls from './Modal.module.scss';
 import closeBtn from '../../assets/btn-delete.svg';
 
-export const AuthModal = ({ message, onClose }) => {
+export const Message = ({ message, onClose }) => {
   return (
     <div className={`${cls.messageBox} ${message && cls.active}`}>
       <div className={cls.message}>
